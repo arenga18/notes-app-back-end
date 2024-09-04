@@ -2,7 +2,6 @@ const { nanoid } = require("nanoid");
 const notes = require("./notes");
 
 const addNoteHandler = (request, h) => {
-  console.log("tes");
   const { title, tags, body } = request.payload;
   const id = nanoid(16);
   const createdAt = new Date().toISOString();
@@ -34,7 +33,7 @@ const addNoteHandler = (request, h) => {
   }
 
   const response = h.response({
-    status: "Fail",
+    status: "fail",
     message: "Catatan gagal ditambahkan",
   });
   response.code(500);
@@ -42,7 +41,7 @@ const addNoteHandler = (request, h) => {
 };
 
 const getAllNotesHandler = (request, h) => ({
-  status: "Success",
+  status: "success",
   data: {
     notes,
   },
@@ -55,7 +54,7 @@ const getNoteByIdHandler = (request, h) => {
 
   if (note !== undefined) {
     return {
-      status: "Success",
+      status: "success",
       data: {
         note,
       },
@@ -63,7 +62,7 @@ const getNoteByIdHandler = (request, h) => {
   }
 
   const response = h.response({
-    status: "Fail",
+    status: "fail",
     message: "Catatan tidak ditemukan",
   });
   response.code(404);
@@ -88,7 +87,7 @@ const editNoteByIdHandler = (request, h) => {
     };
 
     const response = h.response({
-      status: "Success",
+      status: "success",
       message: "Catatan berhasil diperbarui",
     });
     response.code(200);
@@ -96,7 +95,7 @@ const editNoteByIdHandler = (request, h) => {
   }
 
   const response = h.response({
-    status: "Fail",
+    status: "fail",
     message: "Gagal memperbarui catatan. Id tidak ditemukan",
   });
   response.code(404);
@@ -111,7 +110,7 @@ const deleteNoteByIdHandler = (request, h) => {
   if (index !== -1) {
     notes.splice(index, 1);
     const response = h.response({
-      status: "Success",
+      status: "success",
       message: "Catatan berhasil dihapus",
     });
     response.code(200);
